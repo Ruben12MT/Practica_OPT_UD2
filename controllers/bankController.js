@@ -1,0 +1,119 @@
+// controllers/bankController.js
+const bankService = require("../services/bankService");
+
+class BankController {
+
+  async uploadBankLogo(req, res) {
+    try {
+      const id = req.params.id;
+      const ext = req.file.filename.split(".").pop();
+      const logoUrl = `${id}.${ext}`;
+      await bankService.updateLogo(id, logoUrl);
+      res.json({ message: "Logo subido correctamente", logoUrl });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Error al subir el logo" });
+    }
+  }
+
+  async getAllBanks(req, res) {
+    try {
+      const banks = await bankService.getAllBanks();
+      return res.status(200).json({
+        ok: true,
+        datos: banks,
+        mensaje: "Bancos recuperados correctamente",
+      });
+    } catch (err) {
+      console.error("Error en getAllBank:", err);
+      return res.status(500).json({
+        ok: false,
+        datos: null,
+        mensaje: "Error al recuperar bancos",
+      });
+    }
+  }
+
+  async getBankById(req, res) {
+    const id_bank = parseInt(req.params.id);
+
+    try {
+      const banks = await bankService.getBankById(id_bank);
+      return res.status(200).json({
+        ok: true,
+        datos: banks,
+        mensaje: "Banco recuperado correctamente",
+      });
+    } catch (err) {
+      console.error("Error en getAllBanks:", err);
+      return res.status(500).json({
+        ok: false,
+        datos: null,
+        mensaje: "No se ha encontrado a ese banco",
+      });
+    }
+  }
+
+  async deleteBank(req, res) {
+    const id_bank = parseInt(req.params.id);
+    try {
+      const bank = await bankService.deleteBank(id_bank);
+      return res.status(200).json({
+        ok: true,
+        datos: bank,
+        mensaje: "Banco borrado correctamente",
+      });
+    } catch (err) {
+      console.error("Error en deleteBank:", err);
+      return res.status(500).json({
+        ok: false,
+        datos: null,
+        mensaje: "No se ha podido borrar a ese banco",
+      });
+    }
+  }
+
+  async createBank(req, res) {
+    try {
+      const bankData = req.body;
+      const newBank = await bankService.createBank(bankData);
+
+      return res.status(200).json({
+        id: newBank.id,
+        ok: true,
+        datos: null,
+        mensaje: "Banco insertado correctamente",
+      });
+    } catch (err) {
+      console.error("Error en createBank:", err);
+      return res.status(500).json({
+        ok: false,
+        datos: null,
+        mensaje: "Error al insertar banco",
+      });
+    }
+  }
+
+  async updateBank(req, res) {
+    try {
+      const id = req.params.id;
+      const bankData = req.body;
+      const updated = await bankService.updateBank(id, bankData);
+
+      return res.status(200).json({
+        ok: true,
+        datos: updated,
+        mensaje: "Banco actualizado correctamente",
+      });
+    } catch (err) {
+      console.error("Error en updateBank:", err);
+      return res.status(500).json({
+        ok: false,
+        datos: null,
+        mensaje: "Error al actualizar banco",
+      });
+    }
+  }
+}
+
+module.exports = new BankController();

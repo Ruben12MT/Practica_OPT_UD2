@@ -1,0 +1,32 @@
+### GET /api/branches recupera todas las sucursales
+GET http://localhost:3000/api/branches
+
+### GET /api/branches/id recupera todas las sucursales por ID
+GET http://localhost:3000/api/branches/1
+
+### DELETE /api/branches/id borra una sucursal por ID
+DELETE http://localhost:3000/api/branches/5
+
+### POST /api/branches crea una nueva sucursal
+POST http://localhost:3000/api/branches
+Content-Type: application/json
+
+{
+  "name": "sucursal Central",
+  "n_employees": 120,
+  "initial_cap": 5000000,
+  "foundation": "1998-05-12",
+  "active": true
+}
+
+### PUT /api/branches/id actualiza una sucursal existente
+PUT http://localhost:3000/api/branches/4
+Content-Type: application/json
+
+{
+  "name": "sucursal Central Renovado",
+  "n_employees": 150,
+  "initial_cap": 7500000,
+  "foundation": "1998-05-12",
+  "active": false
+}
