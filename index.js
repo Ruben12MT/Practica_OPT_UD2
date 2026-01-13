@@ -22,7 +22,9 @@ app.use(express.json());
 // ============================================
 // MIDDLEWARE - CORS - Cualquier origen
 // ============================================
+
 app.use(cors());
+
 
 // ============================================
 // MIDDLEWARE - ARCHIVOS ESTÁTICOS
@@ -47,3 +49,4 @@ app.use("/api/banks", bankRoutes);
 app.listen(port, () => {
   console.log(`Servidor escuchando en el puerto ${port}`);
 });
+

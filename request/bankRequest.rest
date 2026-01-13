@@ -1,6 +1,9 @@
 ### GET /api/banks recupera todos los bancos
 GET http://localhost:3000/api/banks
 
+### GET /api/banks recupera todos los bancos en una página
+GET http://localhost:3000/api/banks/bypage/1
+
 
 ### GET /api/banks/id recupera todos los bancos por ID
 GET http://localhost:3000/api/banks/1

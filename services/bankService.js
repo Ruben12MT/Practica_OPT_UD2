@@ -40,6 +40,15 @@ class BankService {
   async updateLogo(id, logoUrl){
     return await bank.update({url_image: logoUrl}, {where:{id:id}})
   }
+
+  async getBanksByPage(n_page){
+    const { count, rows } = await bank.findAndCountAll({
+      limit: 10,
+      offset: (n_page - 1) * 10,
+      order: [['id', 'ASC']]
+    });
+    return {count, banks: rows};
+  }
 }
 
 module.exports = new BankService();

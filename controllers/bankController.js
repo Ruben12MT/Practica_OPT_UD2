@@ -1,8 +1,8 @@
 // controllers/bankController.js
+const bank = require("../models/bank");
 const bankService = require("../services/bankService");
 
 class BankController {
-
   async uploadBankLogo(req, res) {
     try {
       const id = req.params.id;
@@ -34,14 +34,33 @@ class BankController {
     }
   }
 
+  async getBanksByPage(req, res) {
+    const n_page = parseInt(req.params.npage);
+    try {
+      const { count, banks } = await bankService.getBanksByPage(n_page);
+      return res.status(200).json({
+        ok: true,
+        datos: { count: count, banks: banks },
+        mensaje: "Bancos recuperados correctamente",
+      });
+    } catch (err) {
+      console.error("Error en getAllBank:", err);
+      return res.status(500).json({
+        ok: false,
+        datos: null,
+        mensaje: "Error al recuperar bancos",
+      });
+    }
+  }
+
   async getBankById(req, res) {
     const id_bank = parseInt(req.params.id);
 
     try {
-      const banks = await bankService.getBankById(id_bank);
+      const bank = await bankService.getBankById(id_bank);
       return res.status(200).json({
         ok: true,
-        datos: banks,
+        datos: bank,
         mensaje: "Banco recuperado correctamente",
       });
     } catch (err) {
@@ -56,8 +75,10 @@ class BankController {
 
   async deleteBank(req, res) {
     const id_bank = parseInt(req.params.id);
+
     try {
       const bank = await bankService.deleteBank(id_bank);
+
       return res.status(200).json({
         ok: true,
         datos: bank,
@@ -65,6 +86,20 @@ class BankController {
       });
     } catch (err) {
       console.error("Error en deleteBank:", err);
+
+      if (
+        err.name === "SequelizeForeignKeyConstraintError" ||
+        err.parent?.code === "ER_ROW_IS_REFERENCED_2" ||
+        err.parent?.code === "ER_ROW_IS_REFERENCED"
+      ) {
+        return res.status(400).json({
+          ok: false,
+          datos: null,
+          mensaje:
+            "No se puede borrar el banco porque tiene sucursales asociadas",
+        });
+      }
+
       return res.status(500).json({
         ok: false,
         datos: null,
