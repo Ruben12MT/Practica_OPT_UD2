@@ -58,6 +58,17 @@ class BankController {
 
     try {
       const bank = await bankService.getBankById(id_bank);
+
+      if (!bank) {
+        return res
+          .status(404)
+          .json({
+            ok: false,
+            datos: null,
+            mensaje: "No existe ningún banco con ese ID",
+          });
+      }
+
       return res.status(200).json({
         ok: true,
         datos: bank,
@@ -146,6 +157,31 @@ class BankController {
         ok: false,
         datos: null,
         mensaje: "Error al actualizar banco",
+      });
+    }
+  }
+
+  async getBanksByProps(req, res) {
+    try {
+      const { name, initial_cap, active } = req.body;
+
+      const banks = await bankService.getBanksByProps(
+        name,
+        initial_cap,
+        active
+      );
+
+      return res.status(200).json({
+        ok: true,
+        datos: banks,
+        mensaje: "Bancos recuperados correctamente",
+      });
+    } catch (err) {
+      console.error("Error en getBanksByProps:", err);
+      return res.status(500).json({
+        ok: false,
+        datos: null,
+        mensaje: "Error al recuperar bancos",
       });
     }
   }

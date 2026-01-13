@@ -1,32 +1,46 @@
-### GET /api/branches recupera todas las sucursales
+###############################################
+#               SUCURSALES                   #
+###############################################
+
+### GET /api/branches
 GET http://localhost:3000/api/branches
 
-### GET /api/branches/id recupera todas las sucursales por ID
+### GET /api/branches/:id
 GET http://localhost:3000/api/branches/1
 
-### DELETE /api/branches/id borra una sucursal por ID
+### DELETE /api/branches/:id
 DELETE http://localhost:3000/api/branches/5
 
-### POST /api/branches crea una nueva sucursal
+### POST /api/branches
 POST http://localhost:3000/api/branches
 Content-Type: application/json
 
 {
-  "name": "sucursal Central",
-  "n_employees": 120,
-  "initial_cap": 5000000,
-  "foundation": "1998-05-12",
+  "name": "Sucursal Sevilla Centro",
+  "n_employees": 25,
+  "initial_cap": 200000,
+  "foundation": "2010-03-15",
   "active": true
 }
 
-### PUT /api/branches/id actualiza una sucursal existente
-PUT http://localhost:3000/api/branches/4
+### PUT /api/branches/:id
+PUT http://localhost:3000/api/branches/3
 Content-Type: application/json
 
 {
-  "name": "sucursal Central Renovado",
-  "n_employees": 150,
-  "initial_cap": 7500000,
-  "foundation": "1998-05-12",
+  "name": "Sucursal Sevilla Norte",
+  "n_employees": 30,
+  "initial_cap": 250000,
+  "foundation": "2010-03-15",
   "active": false
+}
+
+### POST /api/branches/filter
+POST http://localhost:3000/api/branches/filter
+Content-Type: application/json
+
+{
+  "name": "sev",
+  "initial_cap": 100000,
+  "active": true
 }

@@ -35,10 +35,6 @@ module.exports = function(sequelize, DataTypes) {
         model: 'bank',
         key: 'id'
       }
-    },
-    url_image: {
-      type: DataTypes.STRING(300),
-      allowNull: true
     }
   }, {
     sequelize,

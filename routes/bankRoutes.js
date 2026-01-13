@@ -11,5 +11,6 @@ router.put('/:id', bankController.updateBank);
 router.delete('/:id', bankController.deleteBank);
 router.post("/upload-logo/:id", upload.single("logo"), bankController.uploadBankLogo);
 router.get("/bypage/:npage", bankController.getBanksByPage);
+router.post("/filter", bankController.getBanksByProps);
 
 module.exports = router;

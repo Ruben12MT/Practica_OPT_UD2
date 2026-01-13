@@ -7,6 +7,7 @@ const cors = require("cors");
 
 // Rutas de la API
 const bankRoutes = require("./routes/bankRoutes");
+const branchRoutes = require("./routes/branchRoutes");
 
 // ============================================
 // INICIALIZACIÓN
@@ -35,6 +36,8 @@ app.use(express.static(path.join(__dirname, "public")));
 // RUTAS - API REST
 // ============================================
 app.use("/api/banks", bankRoutes);
+app.use("/api/branches", branchRoutes);
+
 
 // ============================================
 // RUTAS - SPA (Catch-all)
