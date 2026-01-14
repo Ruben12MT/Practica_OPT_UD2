@@ -114,7 +114,7 @@ class BranchController {
   }
   async getBranchesByProps(req, res) {
     try {
-      const { name, dateMin, dateMax, id_bank } = req.body;
+      const { name, dateMin, dateMax, id_bank } = req.query;
       const branches = await branchService.getBranchesByProps(
         name,
         dateMin,

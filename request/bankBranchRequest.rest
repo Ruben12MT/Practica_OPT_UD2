@@ -35,12 +35,5 @@ Content-Type: application/json
   "active": false
 }
 
-### POST /api/branches/filter
-POST http://localhost:3000/api/branches/filter
-Content-Type: application/json
-
-{
-  "name": "sev",
-  "initial_cap": 100000,
-  "active": true
-}
+### GET /api/branches/filter
+GET http://localhost:3000/api/branches/filter?name=Sucursal&dateMin=&dateMax=&id_bank=2

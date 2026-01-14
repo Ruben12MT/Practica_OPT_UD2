@@ -38,15 +38,8 @@ Content-Type: application/json
   "active": false
 }
 
-### POST /api/banks/filter
-POST http://localhost:3000/api/banks/filter
-Content-Type: application/json
-
-{
-  "name": "ban",
-  "initial_cap": 5000000,
-  "active": true
-}
+### GET /api/banks/filter
+GET http://localhost:3000/api/banks/filter?name=ban&initial_cap=5000000=&active=true
 
 
 

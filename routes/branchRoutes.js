@@ -4,8 +4,6 @@ const branchController = require('../controllers/branchController');
 
 //Obtener todas las sucursales
 router.get('/', branchController.getAllBranches);
-//Obtener una sucursal por ID
-router.get('/:id', branchController.getBranchById);
 //Crear una sucursal
 router.post('/', branchController.createBranch);
 //Actualizar una sucursal
@@ -13,5 +11,7 @@ router.put('/:id', branchController.updateBranch);
 //Borrar una sucursal
 router.delete('/:id', branchController.deleteBranch);
 //Filtrar sucursales por parámetros
-router.post('/filter', branchController.getBranchesByProps);
+router.get('/filter', branchController.getBranchesByProps);
+//Obtener una sucursal por ID
+router.get('/:id', branchController.getBranchById);
 module.exports = router;

@@ -60,13 +60,11 @@ class BankController {
       const bank = await bankService.getBankById(id_bank);
 
       if (!bank) {
-        return res
-          .status(404)
-          .json({
-            ok: false,
-            datos: null,
-            mensaje: "No existe ningún banco con ese ID",
-          });
+        return res.status(404).json({
+          ok: false,
+          datos: null,
+          mensaje: "No existe ningún banco con ese ID",
+        });
       }
 
       return res.status(200).json({
@@ -163,12 +161,13 @@ class BankController {
 
   async getBanksByProps(req, res) {
     try {
-      const { name, initial_cap, active } = req.body;
+      const { name, initial_cap, active } = req.query;
+      const activeBool = active === "true";
 
       const banks = await bankService.getBanksByProps(
         name,
         initial_cap,
-        active
+        activeBool
       );
 
       return res.status(200).json({
