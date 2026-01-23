@@ -37,7 +37,10 @@ class BankService {
     if (initial_cap !== null && initial_cap !== "" && !isNaN(initial_cap)) {
       where.initial_cap = { [Op.gte]: parseFloat(initial_cap) };
     }
-    where.active = active;
+
+    if (active != null){
+      where.active = active;
+    }
     return await bank.findAll({ where: where });
   }
 

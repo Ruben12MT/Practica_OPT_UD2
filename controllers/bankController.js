@@ -162,7 +162,9 @@ class BankController {
   async getBanksByProps(req, res) {
     try {
       const { name, initial_cap, active } = req.query;
-      const activeBool = active === "true";
+      var activeBool = null;
+
+      if(active) activeBool = active === "true";
 
       const banks = await bankService.getBanksByProps(
         name,

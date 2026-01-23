@@ -39,7 +39,7 @@ Content-Type: application/json
 }
 
 ### GET /api/banks/filter
-GET http://localhost:3000/api/banks/filter?name=ban&initial_cap=5000000=&active=true
+GET http://localhost:3000/api/banks?name=ban&initial_cap=5000000&active=false
 
 
 

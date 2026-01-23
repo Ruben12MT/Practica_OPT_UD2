@@ -4,9 +4,7 @@ const router = express.Router();
 const bankController = require('../controllers/bankController');
 const upload = require("../middlewares/uploadBankLogo");
 
-router.get('/', bankController.getAllBanks);
-
-router.get('/filter', bankController.getBanksByProps);
+router.get('/', bankController.getBanksByProps);
 router.get('/bypage/:npage', bankController.getBanksByPage);
 
 router.get('/:id', bankController.getBankById);
