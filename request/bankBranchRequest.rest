@@ -16,23 +16,25 @@ Content-Type: application/json
 
 {
   "name": "Sucursal Sevilla Centro",
-  "n_employees": 25,
-  "initial_cap": 200000,
-  "foundation": "2010-03-15",
-  "active": true
+  "n_tellers": 25,
+  "monthly_income": 200000,
+  "opening_date": "2010-03-15",
+  "open": true,
+  "id_bank": 1
 }
 
 ### PUT /api/branches/:id
-PUT http://localhost:3000/api/branches/3
+PUT http://localhost:3000/api/branches/21
 Content-Type: application/json
 
 {
-  "name": "Sucursal Sevilla Norte",
-  "n_employees": 30,
-  "initial_cap": 250000,
-  "foundation": "2010-03-15",
-  "active": false
+  "name": "Sucursal Sevilla Centro Renovada",
+  "n_tellers": 25,
+  "monthly_income": 200000,
+  "opening_date": "2010-03-15",
+  "open": true,
+  "id_bank": 1
 }
 
 ### GET /api/branches/filter
-GET http://localhost:3000/api/branches/filter?name=Sucursal&dateMin=&dateMax=&id_bank=2
+GET http://localhost:3000/api/branches/filter?name=Sucursal&dateMin=2000-01-15&dateMax=&id_bank=2
