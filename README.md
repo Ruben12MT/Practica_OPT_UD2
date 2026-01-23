@@ -1,7 +1,7 @@
 # Practica_OPT_UD2 (Backend de Servicios Financieros)
 
 Este repositorio contiene el servidor API desarrollado para la asignatura **Desarrollo de Interfaces**.  
-El Backend está implementado utilizando **Node.js** y **Express**, proporcionando una API RESTful para la gestión de bancos y sucursales.
+El Backend está implementado utilizando **Node.js** , **Express** y  **Sequelize**, proporcionando una API RESTful para la gestión de bancos y sucursales.
 
 ---
 
