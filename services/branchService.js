@@ -10,7 +10,15 @@ const models = initModels(sequelize);
 const branch = models.bank_branch;
 class BranchService {
   async getAllBranches() {
-    return await branch.findAll();
+    return await branch.findAll({
+      include: [
+        {
+          model: models.bank,
+          as: "id_bank_bank",
+          attributes: ["name"],
+        },
+      ],
+    });
   }
   async getBranchById(idBranch) {
     return await branch.findByPk(idBranch);
@@ -32,16 +40,16 @@ class BranchService {
 
     // Buscar sucursal por nombre.
     if (name && name.trim() !== "") {
-      where.name = { [Op.like]: `%${name}%`};
+      where.name = { [Op.like]: `%${name}%` };
     }
 
     // Filtrar por rango de fechas
     if (dateMin && dateMax) {
       where.opening_date = { [Op.between]: [dateMin, dateMax] };
     } else if (dateMin) {
-      where.opening_date = {[Op.gte]:dateMin };
+      where.opening_date = { [Op.gte]: dateMin };
     } else if (dateMax) {
-      where.opening_date = { [Op.lte]: dateMax};
+      where.opening_date = { [Op.lte]: dateMax };
     }
 
     // Filtrar por banco asociado así puedo sacar las sucursales que tiene un banco en concreto.
@@ -49,7 +57,13 @@ class BranchService {
       where.id_bank = parseInt(id_bank);
     }
 
-    return await branch.findAll({ where });
+    return await branch.findAll({ where, include: [
+        {
+          model: models.bank,
+          as: "id_bank_bank",
+          attributes: ["name"],
+        },
+      ], });
   }
 }
 
