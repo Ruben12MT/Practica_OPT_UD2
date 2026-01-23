@@ -1,6 +1,5 @@
-###############################################
-#               SUCURSALES                   #
-###############################################
+#SUCURSALES
+
 
 ### GET /api/branches
 GET http://localhost:3000/api/branches

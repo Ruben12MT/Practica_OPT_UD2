@@ -105,7 +105,7 @@ class BankController {
           ok: false,
           datos: null,
           mensaje:
-            "No se puede borrar el banco porque tiene sucursales asociadas",
+            "Parece que no se ha podido borrar el banco.",
         });
       }
 
