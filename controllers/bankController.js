@@ -9,7 +9,11 @@ class BankController {
       const ext = req.file.filename.split(".").pop();
       const logoUrl = `${id}.${ext}`;
       await bankService.updateLogo(id, logoUrl);
-      res.json({ message: "Logo subido correctamente", logoUrl });
+      res.json({
+        message: "Logo subido correctamente",
+        logoUrl: logoUrl,
+        logoFullUrl: `/uploads/${logoUrl}`,
+      });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Error al subir el logo" });
@@ -104,8 +108,7 @@ class BankController {
         return res.status(400).json({
           ok: false,
           datos: null,
-          mensaje:
-            "Parece que no se ha podido borrar el banco.",
+          mensaje: "Parece que no se ha podido borrar el banco.",
         });
       }
 
@@ -164,12 +167,12 @@ class BankController {
       const { name, initial_cap, active } = req.query;
       var activeBool = null;
 
-      if(active) activeBool = active === "true";
+      if (active) activeBool = active === "true";
 
       const banks = await bankService.getBanksByProps(
         name,
         initial_cap,
-        activeBool
+        activeBool,
       );
 
       return res.status(200).json({
