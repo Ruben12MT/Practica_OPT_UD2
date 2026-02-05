@@ -1,12 +1,9 @@
-// Importar libreria para manejo de ficheros de configuración dependiendo de la variable de entorno NODE_ENV
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV || "development"}`,
-});
+require("dotenv").config();
 
 module.exports = {
   port: process.env.PORT || 3000,
   db: {
-    host: process.env.DB_HOST || "localhost",
+    host: process.env.DB_HOST || "db",
     user: process.env.DB_USER || "root",
     password: process.env.DB_PASSWORD || "test",
     name: process.env.DB_NAME || "bancos_db",
@@ -15,8 +12,8 @@ module.exports = {
   secretKey: process.env.SECRET_KEY || "default_secret",
 };
 
-console.log("DBNAME:", process.env.DB_NAME);
-console.log("DBHOST:", process.env.DB_HOST);
-console.log("DBUSER:", process.env.DB_USER);
-console.log("DBPORT:", process.env.DB_PORT);
+console.log("--- Configuración Cargada ---");
+console.log("DB_NAME:", process.env.DB_NAME);
+console.log("DB_HOST:", process.env.DB_HOST);
+console.log("PORT:", process.env.PORT);
 console.log("NODE_ENV:", process.env.NODE_ENV);

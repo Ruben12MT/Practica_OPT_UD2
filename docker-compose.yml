@@ -1,4 +1,4 @@
-version: "1.0"
+version: "3.8"
 
 services:
   db:
@@ -8,12 +8,10 @@ services:
       - "${MYSQL_PORT}:3306"
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-      - persistent:/var/lib/mysql # He añadido /mysql para que sea la ruta correcta
-      - ./dump:/docker-entrypoint-initdb.d:ro # CARGA INICIAL DE DATOS
+      - persistent:/var/lib/mysql
+      - ./dump:/docker-entrypoint-initdb.d:ro
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -33,7 +31,7 @@ services:
     ports:
       - "${EXPRESS_PORT}:3000"
     volumes:
-      - .:/app # QUITAR EN PRODUCCIÓN REAL
+      - .:/app
       - /app/node_modules
     depends_on:
       - db
