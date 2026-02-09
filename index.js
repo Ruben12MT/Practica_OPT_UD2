@@ -49,7 +49,11 @@ app.use("/api/branches", branchRoutes);
 // ============================================
 // SERVIDOR
 // ============================================
-app.listen(port, () => {
-  console.log(`Servidor escuchando en el puerto ${port}`);
-});
+
+if (process.env.NODE_ENV !== "test") {
+  app.listen(port, () => {
+    console.log(`Servidor escuchando en el puerto ${port}`);
+  });
+}
+module.exports = app;
 
